@@ -2,13 +2,25 @@ package Arrays.easy;
 
 public class RemoveDuplicates {
 
-    public static int removeDuplicates(int[] nums) {
+        public static int removeDuplicates(int[] nums) {
 
-        // Write your code here
+            if (nums.length == 0) {
+                return 0;
+            }
 
+            int prev = nums[0];
+            int j = 1;
 
-        return 0;
-    }
+            for (int i = 1; i < nums.length; i++) {
+
+                if (prev != nums[i]) {
+                    prev = nums[i];
+                    nums[j++] = prev;
+                }
+            }
+
+            return j;
+        }
 
 //    Input:[1,1,2]
 //
