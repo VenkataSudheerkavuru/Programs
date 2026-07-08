@@ -2,7 +2,7 @@ package Arrays.easy;
 
 import java.util.Arrays;
 
-public class LeftRotateByK {
+public class _04_LeftRotateByK {
 
     /*
      * Problem:

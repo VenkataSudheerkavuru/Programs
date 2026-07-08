@@ -1,6 +1,6 @@
 package Arrays.easy;
 
-public class RemoveDuplicates {
+public class _02_RemoveDuplicates {
 
         public static int removeDuplicates(int[] nums) {
 

@@ -1,6 +1,6 @@
 package Arrays.easy;
 
-public class SecondLargestElement {
+public class _01_SecondLargestElement {
 
     public static int secondLargest(int[] arr) {
 

@@ -2,7 +2,7 @@ package Arrays.easy;
 
 import java.util.Arrays;
 
-public class MoveZeroesToEnd {
+public class _05_MoveZeroesToEnd {
 
     /*
      * Problem:
