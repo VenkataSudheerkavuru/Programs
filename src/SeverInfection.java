@@ -1,89 +1,69 @@
-
 public class SeverInfection {
     public static void main(String[] args) {
+//        int[][] grid = {{1, 0, -1}, {0, -1, 0}, {-1, 0, 0}};
+        int[][] grid = {{1,-1,-1}};
 
-        int[][] grid = {{1,0,0},{-1,-1,-1},{0,0,0}};
-        int min = getMinimumMinutes(grid);
-       for(int i = 0;i<3;i++){
-           for(int j = 0;j<3;j++){
-               if (grid[i][j] == 0) {
-                   min = -1;
-                   break;
-               }
-           }
-       }
-       System.out.print(min);
+        int res = getMinimumMinutes(grid);
+        System.out.println("result" + res);
     }
 
-    public static int getMinimumMinutes(int[][] grid){
-        int cols = grid.length;
-        int rows = grid[0].length;
+    static int getMinimumMinutes(int[][] grid) {
 
-        int result = 0;
+        int count = 0;
+        int newCount = 0;
+        int[][] temp = new int[grid[0].length][grid.length];
         int minimum = 0;
-        int count =0;
 
-        int[][] temp = new int[3][3];
-        copyValues(temp,grid);
+        while (true) {
+            copyArray(grid, temp);
+            for (int i = 0; i < grid.length; i++) {
+                for (int j = 0; j < grid.length; j++) {
 
-        while(true){
-
-            for(int i =0;i<rows;i++){
-                for(int j =0;j<cols;j++){
-                    if(grid[i][j] == 1){
-                        if(i!=0 && i+1!=cols){
-                            if(grid[i-1][j] == 0) {
-                                temp[i - 1][j] = 1;
-                                result++;
-                            }
-                            if(i<rows && grid[i+1][j] == 0) {
-                                temp[i + 1][j] = 1;
-                                result ++;
-                            }
-                        }
-                        if(j!=0 && j!=rows){
-                            if(grid[i][j-1] == 0){
-                                temp[i][j-1] = 1;
-                                result++;
-                            }
-                            if(i+1<rows && j+1<cols && grid[i][j+1] == 0) {
-                                temp[i][j + 1] = 1;
-                                result++;
-                            }
-                        }
-                        if(i == 0 && i+1<rows && grid[i+1][j] == 0){
-                            temp[i+1][j] = 1;
-                            result++;
-                        }
-                        if(j== 0 && j+1 <cols && grid[i][j+1] == 0){
-                            temp[i][j+1] =1;
-                            result++;
-                        }
-                        if(i== rows-1 && grid[i-1][j] == 0){
-                            temp[i-1][j] = 1;
-                            result++;
-                        }
-                        if(j==cols-1 && grid[i][j-1]==0){
-                            temp[i][j-1] = 1;
-                            result++;
+                    if (grid[i][j] == 0) {
+                        if ((i != 0 && grid[i - 1][j] == 1)
+                                || (j != 0 && grid[i][j - 1] == 1)
+                                || (i+1 != grid.length && grid[i + 1][j] == 1)
+                                || (j+1 != grid.length && grid[i][j + 1] == 1)) {
+                            temp[i][j] = 1;
+                            count ++;
                         }
                     }
 
                 }
             }
-            copyValues(grid,temp);
-            if(result == minimum){
-                return count;
+            if (count == newCount) {
+                return checkANyleft(grid,minimum);
             }
-            count++;
-            minimum = result;
+            copyArray(temp, grid);
+            minimum ++;
+            newCount = count;
         }
-
     }
-    public static void copyValues(int[][] arr1,int[][] arr2){
-        for(int i = 0;i<3;i++){
-            System.arraycopy(arr2[i], 0, arr1[i], 0, 3);
+    public static int checkANyleft(int[][] grid,int min) {
+        for (int[] ints : grid) {
+            for (int j = 0; j < grid.length; j++) {
+                if (ints[j] == -1) {
+                    return -1;
+                }
+            }
         }
+        return min;
+    }
 
+
+    //copy arr1 to arr2
+    public static void copyArray(int[][] a1, int[][] a2) {
+        for (int i = 0; i < a1.length; i++) {
+            System.arraycopy(a1[i], 0, a2[i], 0, a1.length);
+        }
+    }
+
+    public void display(int[][] arr) {
+        for (int[] ints : arr) {
+            for (int j = 0; j < arr.length; j++) {
+                System.out.print(ints[j]);
+            }
+            System.out.println();
+        }
     }
 }
