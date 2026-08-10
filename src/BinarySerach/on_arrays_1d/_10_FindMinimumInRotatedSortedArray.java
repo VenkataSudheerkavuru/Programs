@@ -1,6 +1,4 @@
-package BinarySerach.easy;
-
-import java.util.Arrays;
+package BinarySerach.on_arrays_1d;
 
 public class _10_FindMinimumInRotatedSortedArray {
 

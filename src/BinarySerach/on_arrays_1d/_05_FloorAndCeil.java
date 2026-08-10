@@ -1,4 +1,4 @@
-package BinarySerach.easy;
+package BinarySerach.on_arrays_1d;
 
 import java.util.Arrays;
 

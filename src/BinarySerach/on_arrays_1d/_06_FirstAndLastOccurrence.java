@@ -1,17 +1,17 @@
-package BinarySerach.easy;
+package BinarySerach.on_arrays_1d;
 
 import java.util.Arrays;
 
-public class _07_CountOccurrences {
+public class _06_FirstAndLastOccurrence {
 
     /*
      * Problem:
      * Given a sorted array and a target,
-     * return the number of occurrences
+     * return the first and last occurrence
      * of the target.
      *
-     * If the target is not present,
-     * return 0.
+     * If the target is not found,
+     * return {-1,-1}.
      *
      * Example:
      *
@@ -19,15 +19,8 @@ public class _07_CountOccurrences {
      * target = 8
      *
      * Output:
-     * 3
+     * [3,5]
      */
-
-    public static int countOccurrences(int[] nums, int target) {
-
-        // Write your code here
-        int[] arr = searchRange(nums,target);
-        return arr[1] == -1  ? 0 : arr[1] - arr[0]+1;
-    }
 
     public static int[] searchRange(int[] nums, int target) {
 
@@ -62,35 +55,35 @@ public class _07_CountOccurrences {
         return new int[]{first,last};
     }
 
-    private static void test(int[] nums, int target, int expected) {
+    private static void test(int[] nums, int target, int[] expected) {
 
-        int result = countOccurrences(nums, target);
+        int[] result = searchRange(nums, target);
 
-        if (result == expected) {
+        if (Arrays.equals(result, expected)) {
             System.out.println("PASS");
         } else {
             System.out.println("FAIL");
-            System.out.println("Expected : " + expected);
-            System.out.println("Actual   : " + result);
+            System.out.println("Expected : " + Arrays.toString(expected));
+            System.out.println("Actual   : " + Arrays.toString(result));
         }
     }
 
     public static void main(String[] args) {
 
-        System.out.println("===== Count Occurrences =====");
+        System.out.println("===== First And Last Occurrence =====");
 
-        test(new int[]{1,2,3,4}, 1, 1);
+        test(new int[]{2,4,6,8,8,8,11,13}, 8, new int[]{3,5});
 
-        test(new int[]{2,4,6,8,8,8,11,13}, 8, 3);
+        test(new int[]{1,2,3,4}, 2, new int[]{1,1});
 
-        test(new int[]{1,2,3,4}, 2, 1);
+        test(new int[]{1,2,3,4}, 5, new int[]{-1,-1});
 
-        test(new int[]{1,2,3,4}, 5, 0);
+        test(new int[]{5,5,5,5}, 5, new int[]{0,3});
 
-        test(new int[]{5,5,5,5}, 5, 4);
+        test(new int[]{1,2,3,4}, 0, new int[]{-1,-1});
 
-        test(new int[]{1,1,2,2,2,3}, 2, 3);
+        test(new int[]{1,2,3,4}, 5, new int[]{-1,-1});
 
-        test(new int[]{5,5,5},5,3);
+        test(new int[]{1,1,2,2,3,3}, 2, new int[]{2,3});
     }
 }
