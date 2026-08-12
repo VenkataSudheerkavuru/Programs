@@ -51,9 +51,49 @@ public class MinimumDaysToMakeBouquets {
 
     public static int minDays(int[] bloomDay, int m, int k) {
 
-        // Write your code here
+        if (bloomDay.length < m * k) {
+            return -1;
+        }
 
-        return -1;
+        int min = Integer.MAX_VALUE;
+        int max = 0;
+        int ans = -1;
+
+        for (int i : bloomDay) {
+            min = Math.min(min, i);
+            max = Math.max(max, i);
+        }
+
+        while (min <= max) {
+
+            int temp = 0;
+            int count = 0;
+
+            int mid = min + (max - min) / 2;
+
+            for (int i : bloomDay) {
+
+                if (i <= mid) {
+                    count++;
+                } else {
+                    count = 0;
+                }
+
+                if (count == k) {
+                    temp++;
+                    count = 0;
+                }
+            }
+
+            if (temp >= m) {
+                ans = mid;
+                max = mid - 1;
+            } else {
+                min = mid + 1;
+            }
+        }
+
+        return ans;
     }
 
     private static void test(int[] bloomDay, int m, int k, int expected) {
