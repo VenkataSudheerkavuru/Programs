@@ -1,6 +1,6 @@
 package BinarySerach.on_answers;
 
-public class MinimumDaysToMakeBouquets {
+public class _02_MinimumDaysToMakeBouquets {
 
     /*
      * Problem:

@@ -1,6 +1,6 @@
 package BinarySerach.on_answers;
 
-public class KokoEatingBananas {
+public class _01_KokoEatingBananas {
 
     /*
      * Problem:
