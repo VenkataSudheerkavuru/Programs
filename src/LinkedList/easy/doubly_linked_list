@@ -1,0 +1,122 @@
+# Doubly Linked List — Basics
+
+## 1. Node Structure
+
+A Doubly Linked List node contains:
+- data → stores the value
+- next → reference to the next node
+- prev → reference to the previous node
+
+class Node {
+    int data;
+    Node prev;
+    Node next;
+
+    Node(int data) {
+        this.data = data;
+        this.prev = null;
+        this.next = null;
+    }
+}
+
+Structure:
+
+null <- 10 <-> 20 <-> 30 -> null
+
+
+## 2. Traversal
+
+Forward traversal:
+
+Node temp = head;
+
+while (temp != null) {
+    System.out.println(temp.data);
+    temp = temp.next;
+}
+
+
+Backward traversal is possible because every node has a prev reference.
+
+
+## 3. Insert Node Before Head
+
+Create a new node.
+
+newNode.next = head;
+
+If the current head exists, update its prev:
+
+if (head != null) {
+    head.prev = newNode;
+}
+
+Make the new node the head:
+
+head = newNode;
+
+Example:
+
+Before:
+10 <-> 20 <-> 30
+
+Insert 5:
+
+5 <-> 10 <-> 20 <-> 30
+
+
+Important links:
+
+newNode.next = old head
+old head.prev = newNode
+
+Time: O(1)
+
+
+## 4. Delete Head
+
+Move head to the next node:
+
+head = head.next;
+
+Then remove the backward reference:
+
+if (head != null) {
+    head.prev = null;
+}
+
+Example:
+
+Before:
+10 <-> 20 <-> 30
+
+After deleting head:
+
+20 <-> 30
+
+
+Important:
+
+Always check head != null before accessing head.prev.
+
+Time: O(1)
+
+
+## Key Difference Between Singly and Doubly Linked List
+
+Singly Linked List:
+
+current -> next
+
+Doubly Linked List:
+
+prev <- current -> next
+
+In DLL, whenever we modify links, we generally need to maintain BOTH prev and next references.
+
+
+Operations:
+
+Insert Before Head → O(1)
+Delete Head → O(1)
+Traversal → O(n)

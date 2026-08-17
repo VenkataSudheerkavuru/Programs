@@ -1,0 +1,113 @@
+# Singly Linked List — Basics
+
+## 1. Node Structure
+
+A Linked List consists of nodes.
+
+Each node contains:
+- data → stores the value
+- next → reference to the next node
+
+class Node {
+    int data;
+    Node next;
+
+    Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+## 2. Traversal
+
+Start from head and move using next until null.
+
+Node temp = head;
+
+while (temp != null) {
+    System.out.println(temp.data);
+    temp = temp.next;
+}
+
+## 3. Insertion at Head
+
+Create a new node, point it to the current head, then make it the new head.
+
+Node newNode = new Node(value);
+newNode.next = head;
+head = newNode;
+
+Example:
+Before: 10 -> 20 -> 30 -> null
+After inserting 5: 5 -> 10 -> 20 -> 30 -> null
+
+Time: O(1)
+
+## 4. Deletion of Head
+
+Move head to the next node.
+
+if (head != null) {
+    head = head.next;
+}
+
+Example:
+Before: 10 -> 20 -> 30 -> null
+After: 20 -> 30 -> null
+
+Time: O(1)
+
+## 5. Find Length
+
+Traverse the entire list and count the nodes.
+
+int count = 0;
+Node temp = head;
+
+while (temp != null) {
+    count++;
+    temp = temp.next;
+}
+
+return count;
+
+Time: O(n)
+
+## 6. Search in Linked List
+
+Traverse the list and check each node.
+
+Node temp = head;
+
+while (temp != null) {
+    if (temp.data == target) {
+        return true;
+    }
+    temp = temp.next;
+}
+
+return false;
+
+Time: O(n)
+
+## Key Points
+
+head = first node
+next = reference to next node
+last node's next = null
+
+Basic traversal pattern:
+
+Node temp = head;
+
+while (temp != null) {
+    // process temp.data
+    temp = temp.next;
+}
+
+Operations:
+- Insert at Head → O(1)
+- Delete Head → O(1)
+- Find Length → O(n)
+- Search → O(n)
+- Traversal → O(n)
