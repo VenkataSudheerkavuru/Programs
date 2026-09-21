@@ -1,87 +1,83 @@
 package Recursion;/*
-    Sort a Stack using Recursion
+    Reverse a Stack using Recursion
 
-    Given a stack, sort it in ascending order using recursion.
+    Given a stack, reverse it using recursion.
 
-    You are allowed to use only recursion.
-    Do not use any sorting algorithm or another stack.
+    You are NOT allowed to use another stack.
 
     Example:
 
     Input:
-    [3, 1, 4, 2]
+        [1, 2, 3, 4]
+        4 is the top
 
     Output:
-    [1, 2, 3, 4]
+        [4, 3, 2, 1]
+        1 is the top
 
-    Important:
-    Think about what happens when we remove the top element.
+    Hint:
+
+    1. Pop the top element.
+    2. Recursively reverse the remaining stack.
+    3. Insert the popped element at the BOTTOM of the stack.
+
+    You will need a helper method:
+
+        insertAtBottom(stack, value)
 
     Example:
 
-    Stack:
-        2  <- top
-        4
-        1
-        3
+        Stack = [1, 2, 3]
+        top = 3
 
-    If we remove 2, we first recursively sort:
+        After reversing [1, 2]:
+        [2, 1]
 
-        4
-        1
-        3
-
-    Then we need to put 2 back in the correct position.
-
-    Hint:
-    You will likely need TWO recursive functions:
-
-    1. sortStack()
-       → recursively removes elements until the stack is empty
-
-    2. insertSorted()
-       → inserts one element into an already sorted stack
-
-    Think about the base cases carefully.
+        Now insert 3 at the bottom:
+        [3, 2, 1]
 */
 
 import java.util.*;
 
-class _04_SortStackUsingRecursion {
+class _05_ReverseStackUsingRecursion {
 
-    static void sortStack(Stack<Integer> st) {
+    static void reverseStack(Stack<Integer> st) {
 
-        // Write your code here
         if (st.isEmpty()) return;
+
+        // hold the top element and remove it
         int top = st.pop();
-        // Recursively sort the remaining stack
-        sortStack(st);
-        insertSorted(st, top);
+
+        // reverse the remaining stack
+        reverseStack(st);
+
+        // insert the held element at the bottom
+        insertAtBottom(st, top);
 
     }
 
-    static void insertSorted(Stack<Integer> st, int x) {
-
-        // Write your code here
-        if (st.isEmpty() || st.peek() <= x) {
+    static void insertAtBottom(Stack<Integer> st, int x) {
+        if (st.isEmpty()) {
             st.push(x);
             return;
         }
 
+        // hold the top element and remove it
         int top = st.pop();
 
-        // Recursively insert x in sorted order
-        insertSorted(st, x);
-        st.push(top);
+        // recursively call to reach the bottom
+        insertAtBottom(st, x);
 
+        st.push(top);
     }
+
 
     static void test(Stack<Integer> input, Stack<Integer> expected) {
 
         Stack<Integer> actual = new Stack<>();
         actual.addAll(input);
 
-        sortStack(actual);
+        reverseStack(actual);
 
         if (actual.equals(expected)) {
             System.out.println("PASS");
@@ -97,33 +93,29 @@ class _04_SortStackUsingRecursion {
 
         test(
             new Stack<Integer>() {{
-                push(3);
                 push(1);
-                push(4);
                 push(2);
+                push(3);
+                push(4);
             }},
             new Stack<Integer>() {{
-                push(1);
-                push(2);
-                push(3);
                 push(4);
+                push(3);
+                push(2);
+                push(1);
             }}
         );
 
         test(
             new Stack<Integer>() {{
-                push(5);
-                push(2);
-                push(8);
                 push(1);
+                push(2);
                 push(3);
             }},
             new Stack<Integer>() {{
-                push(1);
-                push(2);
                 push(3);
-                push(5);
-                push(8);
+                push(2);
+                push(1);
             }}
         );
 
@@ -143,18 +135,16 @@ class _04_SortStackUsingRecursion {
 
         test(
             new Stack<Integer>() {{
-                push(3);
-                push(3);
+                push(1);
                 push(1);
                 push(2);
                 push(2);
             }},
             new Stack<Integer>() {{
+                push(2);
+                push(2);
                 push(1);
-                push(2);
-                push(2);
-                push(3);
-                push(3);
+                push(1);
             }}
         );
     }
